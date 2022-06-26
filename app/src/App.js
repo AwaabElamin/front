@@ -26,6 +26,7 @@ function App() {
           </header>
 
           <Routes>
+          {/* <Route path="" element={<App />}></Route> */}
             <Route path="/login" element={<Login />}></Route>
             <Route path="/register" element={<Register />}></Route>
           </Routes>
