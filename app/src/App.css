@@ -1,11 +1,14 @@
+
 .App {
   text-align: center;
 }
 .LoginPosition {
-  text-align: left;
+  text-align: right;
   justify-content: left;
   align-items: left;
   color: rgb(235, 18, 18);
+  float: left;
+  padding-right: 3%;
 }
 .App-logo {
   height: 40vmin;
@@ -23,7 +26,7 @@
   min-height: 10vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  /* align-items: center; */
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
