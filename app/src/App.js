@@ -6,6 +6,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Provider } from "react-redux";
 import { useState } from 'react';
 import { configureStore } from "@reduxjs/toolkit";
+import { AddBook } from './components/Books';
+import { Header } from './components/Header';
 
 function App() {
   const value = configureStore({
@@ -19,16 +21,13 @@ function App() {
 
       <BrowserRouter>
         <Provider store={value}>
-          <header className="App-header">
-            <div className="LoginPosition">
-              <Login />
-            </div>
-          </header>
-
+         <Header/>
+          
           <Routes>
           {/* <Route path="" element={<App />}></Route> */}
             <Route path="/login" element={<Login />}></Route>
             <Route path="/register" element={<Register />}></Route>
+            <Route path="/book/add" element={<AddBook />}></Route>
           </Routes>
         </Provider>
       </BrowserRouter>
