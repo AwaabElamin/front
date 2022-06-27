@@ -10,6 +10,7 @@ export function Login() {
     const [username, setUserName] = useState();
     const [password, setPassword] = useState();
     const [tokenStatus, setTokenStatus] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
     useEffect(() => {
         console.log('use Effect');
         if (localStorage.getItem('token')) {
@@ -20,15 +21,32 @@ export function Login() {
 
     const handleLogout = () => {
         localStorage.removeItem('token');
+        localStorage.removeItem('role');
         setTokenStatus(false);
     }
     const handleSubmit = async () => {
-        localStorage.setItem('token', 'aaaa');
-        setTokenStatus(true);
-        console.log('token= ', localStorage.getItem('token'));
-        const data = await axios.post('localhost:3001/login', { username: 'admin', password: 'admin' })
-        .then(res => console.log(res));
-        
+        const result = await LoginAuth(username, password);
+        if (typeof result === String) {
+            if (result.includes('error')) {
+                console.log('awaab');
+            } else {
+                console.log(result);
+            }
+        } else {
+            console.log('result = ', result);
+            if (result.success) {
+                setTokenStatus(true);
+                localStorage.setItem('token', result.token);
+                localStorage.setItem('role', result.role);
+                console.log('token= ', localStorage.getItem('token'));
+                console.log('role= ', localStorage.getItem('role'));
+                setErrorMessage('');
+            } else {
+                setErrorMessage(result.message)
+            }
+
+        }
+
     }
     return (
         !tokenStatus ?
@@ -44,6 +62,7 @@ export function Login() {
                     value={password} onChange={e => setPassword(e.target.value)}
                 />
                 <button onClick={handleSubmit}>login</button>
+                <br/><span>{errorMessage}</span>
             </div> :
             <>
                 <button onClick={handleLogout}>logout</button>
