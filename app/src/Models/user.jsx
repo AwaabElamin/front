@@ -2,11 +2,11 @@
 import axios from 'axios';
 const URL = "http://localhost:3001";
 export async function LoginAuth(username, password) {
-    let result = '';
+    let result = 
     await axios.post(URL + '/login', { username: username, password: password })
         .then(res => {
-            result = res.data;
+           return res.data;
         })
-        .catch(err => result = 'error:-\n' + err);
+        .catch(err => 'error:-\n' + err);
     return result;
 }
