@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import "bootstrap/dist/css/bootstrap.min.css";
+// import "bootstrap/dist/css/bootstrap.min.css";
 import '../App.css';
 import { LoginAuth } from "../Models/user";
-import axios from 'axios';
 
 
 export function Login() {
@@ -18,7 +17,13 @@ export function Login() {
         }
         else return () => setTokenStatus(false);
     }, [tokenStatus])
-
+    const handleChanged = (e) => {
+        if (e.target.name === 'username') {
+            setUserName(e.target.value);
+        }else{
+            setPassword(e.target.value);
+        }
+    }
     const handleLogout = () => {
         localStorage.removeItem('token');
         localStorage.removeItem('role');
@@ -50,20 +55,20 @@ export function Login() {
     }
     return (
         !tokenStatus ?
-            <div>
+            <>
                 <input
-                    placeholder="user name"
-                    value={username} onChange={e => setUserName(e.target.value)}
+                    placeholder="user name" size={10}
+                    value={username} name='username' onChange={handleChanged}
                     style={{ marginRight: '0.05%' }}
                 />
-                <input
+                <input name='password' size={10}
                     placeholder="password"
                     type={"password"}
-                    value={password} onChange={e => setPassword(e.target.value)}
+                    value={password} onChange={handleChanged}
                 />
                 <button onClick={handleSubmit}>login</button>
-                <br/><span>{errorMessage}</span>
-            </div> :
+                <span>{errorMessage}</span>
+            </> :
             <>
                 <button onClick={handleLogout}>logout</button>
                 <br />
