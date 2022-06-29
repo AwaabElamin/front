@@ -9,6 +9,8 @@ export function Header() {
       </div>
       <nav className='navLeft'>
         <Link className='App-link' to={`/book/add`}>add a book</Link>
+        <span> | </span> 
+         <Link className='App-link' to={`/book/update`}>update book</Link>
       </nav>
     </header>
   )

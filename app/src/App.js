@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import { Login, Register } from './components/user';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { AddBook } from './components/Books';
+import { AddBook, UpdateBook } from './components/Books';
 import { Header } from './components/Header';
 
 function App() {
@@ -18,6 +18,7 @@ function App() {
             <Route exact path="/login" element={<Login />}></Route>
             <Route path="/register" element={<Register />}></Route>
             <Route path="/book/add" element={<AddBook />}></Route>
+            <Route path="/book/update" element={<UpdateBook />}></Route>
           </Routes>
       </BrowserRouter>
       <img src={logo} className="App-logo" alt="logo" />

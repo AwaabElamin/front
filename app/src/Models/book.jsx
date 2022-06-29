@@ -16,3 +16,14 @@ export async function addBook (newBook){
         .catch(err => 'error:-\n' + err);
     return result;
 }
+export async function updateBook (newBook){
+    // console.log('token from update book: ', localStorage.getItem('token'));
+    // console.log('header: ', header)
+    let result = 
+    await axios.put(URL,newBook,header)
+        .then(res => {
+           return res.data;
+        })
+        .catch(err => 'error:-\n' + err);
+    return result;
+}
