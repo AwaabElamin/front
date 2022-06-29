@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 // import "bootstrap/dist/css/bootstrap.min.css";
 import '../App.css';
 import { CreateUser, getAllUsers, LoginAuth } from "../Models/user";
@@ -144,16 +143,12 @@ export  function GetAllUsers() {
     });
     const fetchUsers = async() =>{
         const result = await getAllUsers();
-        let localusers =[];
         // result.map((user,i)=>users.push(user));
         setUsers(result);
-        
-        
     }
     useEffect(()=>{
        fetchUsers();
-       console.log('users ',users);
-    },[]);  
+    },[users]);  
        
     return (<>
         <h1>Get All Users</h1>
