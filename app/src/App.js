@@ -3,8 +3,9 @@ import logo from './logo.svg';
 import './App.css';
 import { GetAllUsers, Login, Register } from './components/users';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { AddBook, UpdateBook } from './components/Books';
+import { AddBook, GetAllBooks, UpdateBook } from './components/Books';
 import { Header } from './components/Header';
+import { BorrowBook } from './components/Borrow';
 
 function App() {
   return (
@@ -18,8 +19,10 @@ function App() {
             <Route exact path="/login" element={<Login />}></Route>
             <Route path="/register" element={<Register />}></Route>
             <Route path="/users" element={<GetAllUsers />}></Route>
+            <Route path="/book" element={<GetAllBooks />}></Route>
             <Route path="/book/add" element={<AddBook />}></Route>
             <Route path="/book/update" element={<UpdateBook />}></Route>
+            <Route path="/borrow/add" element={<BorrowBook />}></Route>
           </Routes>
       </BrowserRouter>
       <img src={logo} className="App-logo" alt="logo" />
