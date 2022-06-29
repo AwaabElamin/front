@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 // import "bootstrap/dist/css/bootstrap.min.css";
 import './App.css';
-import { Login, Register } from './components/user';
+import { GetAllUsers, Login, Register } from './components/users';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AddBook, UpdateBook } from './components/Books';
 import { Header } from './components/Header';
@@ -17,6 +17,7 @@ function App() {
             <Route exact path="/" element={''}></Route>
             <Route exact path="/login" element={<Login />}></Route>
             <Route path="/register" element={<Register />}></Route>
+            <Route path="/users" element={<GetAllUsers />}></Route>
             <Route path="/book/add" element={<AddBook />}></Route>
             <Route path="/book/update" element={<UpdateBook />}></Route>
           </Routes>
