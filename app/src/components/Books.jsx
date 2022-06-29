@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react"
-import { addBook, updateBook } from "../Models/book";
-
+import { addBook, getAllBook, updateBook } from "../Models/book";
+import OneBook from "./book"
 export function AddBook() {
     const [title, setTitle] = useState('');
     const [quantity, setQuantity] = useState('');
     const [price, setPrice] = useState('');
     const [author_sbn, setAuthor_sbn] = useState('');
     const [author_name, setAuthor_name] = useState('');
-    const [errorMessage,setErrorMessage] = useState('');
-    useEffect(()=>{
+    const [errorMessage, setErrorMessage] = useState('');
+    useEffect(() => {
         if (!localStorage.getItem('token')) {
-          window.location.pathname = '/';
+            window.location.pathname = '/';
         }
     });
     const handleChange = (e) => {
@@ -23,13 +23,13 @@ export function AddBook() {
             default:
         }
     }
-    const addBookButtonClicked = async() => {
+    const addBookButtonClicked = async () => {
         const newBook = {
-            title:title
-            ,quantity:quantity
-            ,price:price
-            ,author_name:author_name
-            ,sbn: author_sbn
+            title: title
+            , quantity: quantity
+            , price: price
+            , author_name: author_name
+            , sbn: author_sbn
         }
         const result = await addBook(newBook);
         console.log('add book button clicked');
@@ -62,16 +62,16 @@ export function AddBook() {
         </div>
     </>)
 }
-export function UpdateBook(){
+export function UpdateBook() {
     const [title, setTitle] = useState('');
     const [quantity, setQuantity] = useState('');
     const [price, setPrice] = useState('');
     const [author_sbn, setAuthor_sbn] = useState('');
     const [author_name, setAuthor_name] = useState('');
-    const [errorMessage,setErrorMessage] = useState('');
-    useEffect(()=>{
+    const [errorMessage, setErrorMessage] = useState('');
+    useEffect(() => {
         if (!localStorage.getItem('token')) {
-          window.location.pathname = '/';
+            window.location.pathname = '/';
         }
     });
     const handleChange = (e) => {
@@ -84,37 +84,63 @@ export function UpdateBook(){
             default:
         }
     }
-    const updateBookButtonClicked = async ()=>{
+    const updateBookButtonClicked = async () => {
         const newBook = {
-            title:title
-            ,quantity:quantity
-            ,price:price
-            ,author_name:author_name
-            ,sbn: author_sbn
+            title: title
+            , quantity: quantity
+            , price: price
+            , author_name: author_name
+            , sbn: author_sbn
         }
         const result = await updateBook(newBook);
         if (result.success) {
             if (result.data) {
-            setAuthor_name("");
-            setAuthor_sbn('');
-            setPrice(0);
-            setQuantity(0);
-            setTitle('');
-            setErrorMessage('book updated correctly');
-            }else{
+                setAuthor_name("");
+                setAuthor_sbn('');
+                setPrice(0);
+                setQuantity(0);
+                setTitle('');
+                setErrorMessage('book updated correctly');
+            } else {
                 setErrorMessage('book not found');
-            }            
+            }
         } else {
             setErrorMessage(result.message)
         }
     }
-    return(<>
+    return (<>
         <br /><input name="title" placeholder="Title" value={title} on onChange={handleChange} />
-            <br /><input type="number" name="quantity" placeholder="quantity" value={quantity} on onChange={handleChange} />
-            <br /><input type="number" name="price" placeholder="price" value={price} on onChange={handleChange} />
-            <br /><input name="author_sbn" placeholder="author_sbn" value={author_sbn} on onChange={handleChange} />
-            <br /><input name="author_name" placeholder="author_name" value={author_name} on onChange={handleChange} />
-            <br /><button onClick={updateBookButtonClicked}>add</button>
-            <br /><span>{errorMessage}</span>
+        <br /><input type="number" name="quantity" placeholder="quantity" value={quantity} on onChange={handleChange} />
+        <br /><input type="number" name="price" placeholder="price" value={price} on onChange={handleChange} />
+        <br /><input name="author_sbn" placeholder="author_sbn" value={author_sbn} on onChange={handleChange} />
+        <br /><input name="author_name" placeholder="author_name" value={author_name} on onChange={handleChange} />
+        <br /><button onClick={updateBookButtonClicked}>add</button>
+        <br /><span>{errorMessage}</span>
+    </>)
+}
+export function GetAllBooks() {
+    const [books, setBooks] = useState([]);
+    useEffect(() => {
+        if (!localStorage.getItem('token')) {
+            window.location.pathname = '/';
+        }
+    });
+    const fectchBooks = async () => {
+        const result = await getAllBook();
+        console.log('result:- ', result);
+        setBooks(result);
+    }
+    useEffect(() => {
+        fectchBooks();
+        console.log('books:- ', books);
+    }, []);
+
+    return (<>
+        <h1>All Books</h1>
+        <div>
+            {
+                books.map(u => <OneBook book={u} key={u._id} />)
+            }
+        </div>
     </>)
 }

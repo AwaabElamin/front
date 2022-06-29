@@ -27,3 +27,12 @@ export async function updateBook (newBook){
         .catch(err => 'error:-\n' + err);
     return result;
 }
+export async function getAllBook (){
+    let result = 
+    await axios.get(URL,header)
+        .then(res => {
+           return res.data;
+        })
+        .catch(err => 'error:-\n' + err);
+    return result;
+}
