@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
-import { addBook, getAllBook, updateBook } from "../Models/book";
+import { addBook, getAllBook, getBookByID, updateBook } from "../Models/book";
 import OneBook from "./book"
+
 export function AddBook() {
     const [title, setTitle] = useState('');
     const [quantity, setQuantity] = useState('');
@@ -142,5 +143,44 @@ export function GetAllBooks() {
                 books.map(u => <OneBook book={u} key={u._id} />)
             }
         </div>
+    </>)
+}
+export function GetBookByID() {
+    const [id, setId] = useState();
+    const [error, setError] = useState('');
+    const [data, setData] = useState({});
+    const [show, setShow] = useState(false);
+    const handleChanged = (e) => { setId(e.target.value) }
+    const findBoookButtonClicked = async () => {
+        const result = await getBookByID(id);
+        if (result.status) {
+            console.log(result);
+            setData(result.data);
+            setError('');
+            setShow(true);
+        } else { setError(result.message.message); setShow(false) }
+        console.log(result);
+    }
+    return (<>
+        <div>
+            <input value={id} onChange={handleChanged} placeholder="id" />
+            <button onClick={findBoookButtonClicked}>search</button>
+        </div>
+        {
+            show ?
+                <div>
+                     <label>ID: </label><text>{data._id}</text><br/>
+                    <label>Title: </label><text>{data.title}</text><br/>
+                    <label>Author name: </label><text>{thor?.sbn}</text><br/>
+                    <label>Price: </label><text>{data.data.author?.author_name}</text><br/>
+                    <label>SBN: </label><text>{data.auprice}</text><br/>
+                    <label>Quantity: </label><text>{data.quantity}</text><br/>
+                </div>
+                :
+                <div>
+                    <br /><text>{error}</text>
+                </div>
+        }
+
     </>)
 }

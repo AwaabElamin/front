@@ -36,3 +36,12 @@ export async function getAllBook (){
         .catch(err => 'error:-\n' + err);
     return result;
 }
+export async function getBookByID (id){
+    let result = 
+    await axios.get(URL + '/' + id,header)
+        .then(res => {
+           return res.data;
+        })
+        .catch(err => 'error:-\n' + err);
+    return result;
+}

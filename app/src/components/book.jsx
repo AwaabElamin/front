@@ -3,6 +3,8 @@ export default function OneBook({ book }) {
     return (<>
         <p>
             <h3>{book.title}</h3>
+            <label>ID: </label>
+            <text>{book._id}</text><br />
             <label>Author name: </label>
             <text>{book.author.author_name}</text><br />
             <label>SBN: </label>
