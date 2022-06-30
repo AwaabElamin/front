@@ -45,3 +45,13 @@ export async function getBookByID (id){
         .catch(err => 'error:-\n' + err);
     return result;
 }
+export async function deleteBookById (id){
+    console.log('delete book by id=', id);
+    let result = 
+    await axios.delete(URL +'?id='+ id,header)
+        .then(res => {
+           return res.data;
+        })
+        .catch(err => 'error:-\n' + err);
+    return result;
+}
