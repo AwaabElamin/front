@@ -14,3 +14,13 @@ export async function borrowBook(borrowDetails) {
             .catch(err => 'error:-\n' + err);
     return result;
 }
+
+export async function GetBorrows() {
+    let result =
+        await axios.get(URL,header)
+            .then(res => {
+                return res.data;
+            })
+            .catch(err => 'error:-\n' + err);
+    return result;
+}

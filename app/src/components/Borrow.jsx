@@ -1,10 +1,32 @@
 import { useEffect, useState } from "react";
-import { borrowBook } from "../Models/Borrow";
-
+import { borrowBook, GetBorrows } from "../Models/Borrow";
+const OneBorrow = ({ result }) => {
+    console.log('props: ', result)
+    return (<>
+        <label>book id:</label>
+        <text>{result.book.id}</text><br />
+        <label>book title:</label>
+        <text>{result.book.name}</text><br />
+        <label>book Price:</label>
+        <text>{result.book.price}</text><br />
+        <label>borrow Date:</label>
+        <text>{result.borrowDate}</text><br />
+        <label>Actual Return Date:</label>
+        <text>{result.actualReturnDate}</text><br />
+        <label>Penalty:</label>
+        <text>{result.penalty}</text><br />
+        <label>user id: </label>
+        <text>{result.user.id}</text><br />
+        <label>user name: </label>
+        <text>{result.user.name}</text><br />
+        <label>user email: </label>
+        <text>{result.user.email}</text><br />
+    </>)
+}
 export function BorrowBook() {
-    const [book_id, setBook_id] = useState();
-    const [book_name, setBook_name] = useState();
-    const [book_price, setBook_price] = useState();
+    const [book_id, setBook_id] = useState(localStorage.getItem('bookId'));
+    const [book_name, setBook_name] = useState(localStorage.getItem('bookTitle'));
+    const [book_price, setBook_price] = useState(localStorage.getItem('bookPrice'));
     const [user_id, setUser_id] = useState();
     const [username, setUsername] = useState();
     const [user_email, setUser_email] = useState();
@@ -16,6 +38,9 @@ export function BorrowBook() {
     useEffect(() => {
         if (!localStorage.getItem('token')) {
             window.location.pathname = '/';
+        }
+        if (localStorage.getItem('bookTitle')) {
+            setBook_name(localStorage.getItem('bookTitle'));
         }
     });
     const handleChange = (e) => {
@@ -58,7 +83,7 @@ export function BorrowBook() {
             setBorrowReturn('');
             setActualReturnDate('');
             setPenalty('');
-            setErrorMessage('user added correctly');
+            setErrorMessage('borrowed added correctly');
         } else {
             setErrorMessage(result.message)
         }
@@ -71,12 +96,37 @@ export function BorrowBook() {
             <br /><input name="user_id" placeholder="user_id" value={user_id} on onChange={handleChange} />
             <br /><input name="username" placeholder="username" value={username} on onChange={handleChange} />
             <br /><input name="user_email" placeholder="user_email" value={user_email} on onChange={handleChange} />
-            <br /><input name="borrowDate" placeholder="borrowDate" value={borrowDate} on onChange={handleChange} />
-            <br /><input name="borrowReturn" placeholder="borrowReturn" value={borrowReturn} on onChange={handleChange} />
-            <br /><input name="actualReturnDate" placeholder="actualReturnDate" value={actualReturnDate} on onChange={handleChange} />
-            <br /><input name="penalty" placeholder="penalty" value={penalty} on onChange={handleChange} />
+            <br /><label>borrow Date</label>
+            <input type="date" name="borrowDate" placeholder="borrowDate" value={borrowDate} on onChange={handleChange} />
+            <br /><label>borrow Retuen Date</label>
+            <input type="date" name="borrowReturn" placeholder="borrowReturn" value={borrowReturn} on onChange={handleChange} />
+            <br /><label>Actual Return Date</label>
+            <input type="date" name="actualReturnDate" placeholder="actualReturnDate" value={actualReturnDate} on onChange={handleChange} />
+            <br /><input type="number" name="penalty" placeholder="penalty" value={penalty} on onChange={handleChange} />
+            <span>$10 for each day</span>
             <br /><button onClick={borrowButtonClicked}>add</button>
             <br /><span>{errorMessage}</span>
         </div>
+    </>)
+}
+export function ShowAllBorrow() {
+    const [result, setResult] = useState([]);
+    useEffect(() => {
+        if (!localStorage.getItem('token')) {
+            window.location.pathname = '/';
+        }
+    });
+    const getAllBorrowsBook = async () => {
+        const result = await GetBorrows();
+        console.log('result of Borrows:', result);
+        setResult(result);
+    }
+    useEffect(() => {
+        getAllBorrowsBook();
+    }, []);
+    return (<>
+        <h1>All Borrowed Books</h1>
+        {result.map((book) => <OneBorrow result={book} />)}
+
     </>)
 }
