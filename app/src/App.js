@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AddBook, GetAllBooks, GetBookByID, UpdateBook } from './components/Books';
 import { Header } from './components/Header';
 import { BorrowBook, ShowAllBorrow } from './components/Borrow';
+import { Card } from './components/Cards';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
             <Route path="/book/update" element={<UpdateBook />}></Route>
             <Route path="/borrow" element={<ShowAllBorrow />}></Route>
             <Route path="/borrow/add" element={<BorrowBook />}></Route>
+            <Route path="/card" element={<Card />}></Route>
           </Routes>
       </BrowserRouter>
       <img src={logo} className="App-logo" alt="logo" />

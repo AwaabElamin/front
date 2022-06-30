@@ -33,6 +33,8 @@ export function Login() {
     const handleLogout = () => {
         localStorage.removeItem('token');
         localStorage.removeItem('role');
+        localStorage.removeItem('username');        
+        localStorage.removeItem('email');
         setTokenStatus(false);
         window.location.pathname = '/';
     }
@@ -50,6 +52,8 @@ export function Login() {
                 setTokenStatus(true);
                 localStorage.setItem('token', result.token);
                 localStorage.setItem('role', result.role);
+                localStorage.setItem('email', result.email);
+                localStorage.setItem('username', username);
                 console.log('token= ', localStorage.getItem('token'));
                 console.log('role= ', localStorage.getItem('role'));
                 setErrorMessage('');
