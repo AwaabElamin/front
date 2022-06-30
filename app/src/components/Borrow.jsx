@@ -25,11 +25,17 @@ const OneBorrow = ({ result }) => {
 }
 export function BorrowBook() {
     const today = () => {
-        let newDate = new Date()
+        let newDate = new Date();
         let day = newDate.getDate();
-        let month = newDate.getMonth() + 1;
+        if (day < 10) {
+            day = '0'+day;
+        }
+        console.log('day: ', day);
+        let month = newDate.getMonth() + 1;        
+        if(month < 10)month = '0'+month;
+        console.log('month', month);
         let year = newDate.getFullYear();
-        return `${month}/${day}/${year}`
+        return `${year}/${month}/${day}`
     }
     const [book_id, setBook_id] = useState(localStorage.getItem('bookId'));
     const [book_name, setBook_name] = useState(localStorage.getItem('bookTitle'));
@@ -48,6 +54,9 @@ export function BorrowBook() {
             window.location.pathname = '/';
         }
     });
+    useEffect(()=>{
+        today();
+    },[])
     const handleChange = (e) => {
         switch (e.target.name) {
             case 'book_id': setBook_id(e.target.value); break;
@@ -62,6 +71,22 @@ export function BorrowBook() {
             case 'penalty': setPenalty(e.target.value); break;
             default:
         }
+    }
+    const calculatePenalty = () =>{
+        console.log('borrowReturn:- ', borrowReturn)
+        const localborrowReturn = borrowReturn.split('-');
+        console.log('local borrow Date ', localborrowReturn);
+        const localactualReturnDate = actualReturnDate.split('-');
+        console.log('local borrow Date ', localactualReturnDate);
+        const dif = {
+            year: localactualReturnDate[0] - localborrowReturn[0]<0?0:localactualReturnDate[0] - localborrowReturn[0],
+            month: localactualReturnDate[1] - localborrowReturn[1]<0?0:localactualReturnDate[1] - localborrowReturn[1],
+            day: localactualReturnDate[2] - localborrowReturn[2]<0?0:localactualReturnDate[2] - localborrowReturn[2],
+        }
+        console.log('dif ',dif);
+        const pen = dif.year * 365 + dif.month * 30 + dif.day;
+        console.log('pen ',pen);
+        setPenalty(pen * 10);
     }
     const borrowButtonClicked = async () => {
         const newBorrow = {
@@ -104,11 +129,12 @@ export function BorrowBook() {
             <br /><label>borrow Date</label>
             <input type="date" name="borrowDate" placeholder="borrowDate" value={borrowDate} onChange={handleChange} />
             <br /><label>borrow Retuen Date</label>
-            <input type="date" name="borrowReturn" placeholder="borrowReturn"
+            <input type="date" pattern="\d{4}/\d{2}/\d{2}"  name="borrowReturn" placeholder="borrowReturn"
                 value={borrowReturn} onChange={handleChange} />
             <br /><label>Actual Return Date</label>
             <input type="date" name="actualReturnDate" placeholder="actualReturnDate" value={actualReturnDate} on onChange={handleChange} />
-            <br /><input type="number" name="penalty" placeholder="penalty" value={penalty} onChange={handleChange} />
+            <br /><button onClick={calculatePenalty}>calculate</button>
+            <input type="number" name="penalty" placeholder="penalty" value={penalty} onChange={handleChange} />
             <span>$10 for each day</span>
             <br /><button onClick={borrowButtonClicked}>add</button>
             <br /><span>{errorMessage}</span>
