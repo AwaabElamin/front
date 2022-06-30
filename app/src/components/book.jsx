@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { deleteBookById } from "../Models/book";
+import { deleteBookById, updateBookById } from "../Models/book";
 import { Redirect } from "react-router-dom";
 
 export default function OneBook({ book }) {
@@ -23,6 +23,18 @@ export default function OneBook({ book }) {
         }
         console.log('result:', result);
     }
+    const updateBook = async () => {
+        console.log('update: ', book._id);
+        const result = await updateBookById(book);
+        if (result.success) {
+            localStorage.setItem('quantity', book.quantity);
+            localStorage.setItem('price', book.price);
+            localStorage.setItem('auth', book.author.author_name);
+            localStorage.setItem('sbn', book.author.sbn);
+            window.location.pathname = '/book/update';
+        }
+        console.log('result:', result);
+    }
     const borrowBook = () => {
         console.log('Book: ', book);
         localStorage.setItem('bookTitle', book.title)
@@ -38,7 +50,13 @@ export default function OneBook({ book }) {
                 :
                 <div className="books">
                     <h3>{book.title}</h3>
-                    {showDelete ? <button onClick={deleteBook}>delete</button> : null}
+                    {showDelete ?
+                        <>
+                            <button onClick={deleteBook}>delete</button>
+                            <button onClick={updateBook}>update</button>
+                        </>
+
+                        : null}
                     <button onClick={borrowBook}>Borrow</button>
                     <p>
                         <label>ID: </label>

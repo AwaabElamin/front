@@ -64,11 +64,12 @@ export function AddBook() {
     </>)
 }
 export function UpdateBook() {
-    const [title, setTitle] = useState('');
-    const [quantity, setQuantity] = useState('');
-    const [price, setPrice] = useState('');
-    const [author_sbn, setAuthor_sbn] = useState('');
-    const [author_name, setAuthor_name] = useState('');
+    const [book_id, setBook_id] = useState(localStorage.getItem('bookId'));
+    const [title, setTitle] = useState(localStorage.getItem('bookTitle'));
+    const [quantity, setQuantity] = useState(localStorage.getItem('quantity'));
+    const [price, setPrice] = useState(localStorage.getItem('price'));
+    const [author_sbn, setAuthor_sbn] = useState(localStorage.getItem('sbn'));
+    const [author_name, setAuthor_name] = useState(localStorage.getItem('auth'));
     const [errorMessage, setErrorMessage] = useState('');
     useEffect(() => {
         if (!localStorage.getItem('token')) {
@@ -87,7 +88,8 @@ export function UpdateBook() {
     }
     const updateBookButtonClicked = async () => {
         const newBook = {
-            title: title
+            id:book_id
+            ,title: title
             , quantity: quantity
             , price: price
             , author_name: author_name
