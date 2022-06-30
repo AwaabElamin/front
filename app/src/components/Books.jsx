@@ -137,7 +137,6 @@ export function GetAllBooks() {
     }, []);
 
     return (<>
-        <h1>All Books</h1>
         <div>
             {
                 books.map(u => <OneBook book={u} key={u._id} />)

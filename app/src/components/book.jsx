@@ -25,9 +25,9 @@ export default function OneBook({ book }) {
     }
     const borrowBook = () => {
         console.log('Book: ', book);
-        localStorage.setItem('bookTitle',book.title)
-        localStorage.setItem('bookId',book._id)
-        localStorage.setItem('bookPrice',book.price)
+        localStorage.setItem('bookTitle', book.title)
+        localStorage.setItem('bookId', book._id)
+        localStorage.setItem('bookPrice', book.price)
         setGoTOBorrow(true);
     }
 
@@ -36,19 +36,21 @@ export default function OneBook({ book }) {
             goToBorrow ?
                 window.location.pathname = '/borrow/add'
                 :
-                <p>
+                <div className="books">
                     <h3>{book.title}</h3>
                     {showDelete ? <button onClick={deleteBook}>delete</button> : null}
                     <button onClick={borrowBook}>Borrow</button>
-                    <label>ID: </label>
-                    <text>{book._id}</text><br />
-                    <label>Author name: </label>
-                    <text>{book.author.author_name}</text><br />
-                    <label>SBN: </label>
-                    <text>{book.author.sbn}</text><br />
-                    <label>price: </label><text>{book.price}</text><br />
-                    <label>quantity: </label><text>{book.quantity}</text>
-                </p>
+                    <p>
+                        <label>ID: </label>
+                        <text>{book._id}</text><br />
+                        <label>Author name: </label>
+                        <text>{book.author.author_name}</text><br />
+                        <label>SBN: </label>
+                        <text>{book.author.sbn}</text><br />
+                        <label>price: </label><text>{book.price}</text><br />
+                        <label>quantity: </label><text>{book.quantity}</text>
+                    </p>
+                </div>
         }
 
     </>)
