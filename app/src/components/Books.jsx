@@ -161,13 +161,13 @@ export function GetBookByID() {
         console.log(result);
     }
     return (<>
-        <div>
+        <div className="books">
             <input value={id} onChange={handleChanged} placeholder="id" />
             <button onClick={findBoookButtonClicked}>search</button>
         </div>
         {
             show ?
-                <div>
+                <div className="books">
                     <label>ID: </label><text>{data._id}</text><br />
                     <label>Title: </label><text>{data.title}</text><br />
                     <label>Author name: </label><text>{data.author?.author_name}</text><br />
