@@ -35,6 +35,7 @@ export function Login() {
         localStorage.removeItem('role');
         localStorage.removeItem('username');        
         localStorage.removeItem('email');
+        localStorage.removeItem('id');
         setTokenStatus(false);
         window.location.pathname = '/';
     }
@@ -54,6 +55,7 @@ export function Login() {
                 localStorage.setItem('role', result.role);
                 localStorage.setItem('email', result.email);
                 localStorage.setItem('username', username);
+                localStorage.setItem('id', result.id);
                 console.log('token= ', localStorage.getItem('token'));
                 console.log('role= ', localStorage.getItem('role'));
                 setErrorMessage('');
