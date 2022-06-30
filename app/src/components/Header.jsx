@@ -20,6 +20,8 @@ export function Header() {
         <span> | </span>
         <Link className='App-link' to={`/users`}>users</Link>
         <span> | </span>
+        <Link className='App-link' to={`/borrow`}>borrows</Link>
+        <span> | </span>
         <Link className='App-link' to={`/borrow/add`}>borrow_add</Link>
       </nav>
     </header>
