@@ -157,7 +157,6 @@ export  function GetAllUsers() {
     },[]);  
        
     return (<>
-        <h1>Get All Users</h1>
         <ui>
             {users.map((u)=> <OneUser user={u} key={u._id}/>)}
         </ui>
