@@ -8,23 +8,30 @@ export function Header() {
         <Login />
       </div>
       <nav className='navLeft'>
-        <Link className='App-link' to={`/book`}>books</Link>
-        <span> | </span>
-        <Link className='App-link' to={`/book/find`}>find a book</Link>
-        <span> | </span>
-        <Link className='App-link' to={`/book/add`}>add a book</Link>
-        <span> | </span>
-        <Link className='App-link' to={`/book/update`}>update book</Link>
-        <span> | </span>
-        <Link className='App-link' to={`/register`}>register</Link>
-        <span> | </span>
-        <Link className='App-link' to={`/users`}>users</Link>
-        <span> | </span>
-        <Link className='App-link' to={`/borrow`}>borrows</Link>
-        <span> | </span>
-        <Link className='App-link' to={`/borrow/add`}>borrow_add</Link>
-        <span> | </span>
-        <Link className='App-link' to={`/card`}>My Card</Link>
+        <ul>
+          <li><Link className='App-link' to={`/book`}>books</Link></li>
+          <li><Link className='App-link' to={`/book/find`}>find a book</Link></li>
+          <li><Link className='App-link' to={`/book/add`}>add a book</Link></li>
+          <li><Link className='App-link' to={`/book/update`}>update book</Link></li>
+        </ul>
+      </nav>
+      <nav className='navLeft'>
+        <ul>
+          <li><Link className='App-link' to={`/users`}>users</Link></li>
+          <li><Link className='App-link' to={`/register`}>register</Link></li>
+        </ul>
+      </nav>
+      <nav className='navLeft'>
+        <ul>
+          <li><Link className='App-link' to={`/borrow`}>borrows</Link></li>
+          <li><Link className='App-link' to={`/borrow/add`}>borrow_add</Link></li>
+        </ul>
+      </nav>
+      <nav className='navLeft'>
+        <ul>
+          <li><Link className='App-link' to={`/card`}>My Card</Link></li>
+        </ul>
+
       </nav>
     </header>
   )

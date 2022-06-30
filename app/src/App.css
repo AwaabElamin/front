@@ -24,7 +24,7 @@
 
 .App-header {
   background-color: #393c42;
-  min-height: 15vh;
+  min-height: 18vh;
   color: white;
   padding-right: 3vh;
   padding-top: 2vh;  
@@ -36,6 +36,12 @@
 .navLeft{
   float: left;
   padding-right: 3%;
+  text-align: left;
+}
+.navLeft ul{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
 }
 
 
