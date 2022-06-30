@@ -132,7 +132,7 @@ export function GetAllBooks() {
         setBooks(result);
     }
     useEffect(() => {
-        fectchBooks();
+      fectchBooks();
         console.log('books:- ', books);
     }, []);
 
@@ -169,12 +169,12 @@ export function GetBookByID() {
         {
             show ?
                 <div>
-                     <label>ID: </label><text>{data._id}</text><br/>
-                    <label>Title: </label><text>{data.title}</text><br/>
-                    <label>Author name: </label><text>{data.author?.author_name}</text><br/>
-                    <label>SBN: </label><text>{data.author?.sbn}</text><br/>
-                    <label>Price: </label><text>{data.price}</text><br/>
-                    <label>Quantity: </label><text>{data.quantity}</text><br/>
+                    <label>ID: </label><text>{data._id}</text><br />
+                    <label>Title: </label><text>{data.title}</text><br />
+                    <label>Author name: </label><text>{data.author?.author_name}</text><br />
+                    <label>SBN: </label><text>{data.author?.sbn}</text><br />
+                    <label>Price: </label><text>{data.price}</text><br />
+                    <label>Quantity: </label><text>{data.quantity}</text><br />
                 </div>
                 :
                 <div>
