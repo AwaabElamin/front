@@ -148,7 +148,7 @@ export  function GetAllUsers() {
     }
     useEffect(()=>{
        fetchUsers();
-    },[users]);  
+    },[]);  
        
     return (<>
         <h1>Get All Users</h1>
